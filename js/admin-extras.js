@@ -9,7 +9,7 @@
     tab.addEventListener("click", () => {
       const t = tab.getAttribute("data-tab");
       document.querySelectorAll(".admin-tabs .tab").forEach(x => x.classList.toggle("on", x === tab));
-      ["bord", "demandes", "galerie", "abonnes"].forEach(k => {
+      ["bord", "demandes", "blog", "galerie", "abonnes", "image"].forEach(k => {
         const el = document.getElementById("tab-" + k);
         if (el) el.style.display = (t === k) ? "block" : "none";
       });
@@ -129,4 +129,115 @@
       prompt("Copiez les emails ci-dessous :", emails);
     }
   });
+
+  /* ---------- MON IMAGE : logo + photo ---------- */
+  async function chargerReglages() {
+    const db = window._db; if (!db) return;
+    const ent = await getEnt(db);
+    if (!ent) return;
+    const { data: reg } = await db.from("reglages").select("*").eq("entreprise_id", ent.id).maybeSingle();
+
+    const apercuLogo = $("apercuLogo");
+    const apercuPhoto = $("apercuPhoto");
+
+    if (apercuLogo) {
+      apercuLogo.innerHTML = (reg && reg.logo_url)
+        ? `<img src="${esc(reg.logo_url)}" alt="Logo"><button type="button" class="img-del" data-quoi="logo">Retirer</button>`
+        : `<div class="img-vide">Aucun logo</div>`;
+    }
+    if (apercuPhoto) {
+      apercuPhoto.innerHTML = (reg && reg.photo_url)
+        ? `<img src="${esc(reg.photo_url)}" alt="Photo"><button type="button" class="img-del" data-quoi="photo">Retirer</button>`
+        : `<div class="img-vide">Aucune photo</div>`;
+    }
+
+    const apercuCouv = $("apercuCouverture");
+    if (apercuCouv) {
+      apercuCouv.innerHTML = (reg && reg.couverture_url)
+        ? `<img src="${esc(reg.couverture_url)}" alt="Couverture"><button type="button" class="img-del" data-quoi="couverture">Retirer</button>`
+        : `<div class="img-vide">Aucune image de couverture</div>`;
+    }
+
+    document.querySelectorAll(".img-del").forEach(b =>
+      b.onclick = () => retirerImage(b.getAttribute("data-quoi")));
+  }
+  window.chargerReglages = chargerReglages;
+
+  async function uploaderImage(quoi, file, statusEl, btn, maxMo) {
+    const db = window._db;
+    const limite = maxMo || 3;
+    status(statusEl, "", "");
+    if (!file) { status(statusEl, "Choisissez une image.", "err"); return; }
+    if (file.size > limite * 1024 * 1024) { status(statusEl, `Image trop lourde (max ${limite} Mo).`, "err"); return; }
+
+    if (btn) btn.disabled = true;
+    status(statusEl, "Envoi en cours…", "");
+
+    const ent = await getEnt(db);
+    if (!ent) { status(statusEl, "Entreprise introuvable.", "err"); if (btn) btn.disabled = false; return; }
+
+    const ext = (file.name.split(".").pop() || "png").toLowerCase().replace(/[^a-z0-9]/g, "");
+    const chemin = `${ent.slug}/branding/${quoi}-${Date.now()}.${ext}`;
+
+    const up = await db.storage.from(BUCKET).upload(chemin, file, { cacheControl: "3600", upsert: false });
+    if (up.error) { status(statusEl, "Échec : " + up.error.message, "err"); if (btn) btn.disabled = false; return; }
+
+    const { data: pub } = db.storage.from(BUCKET).getPublicUrl(chemin);
+
+    // Récupérer l'ancien chemin pour le supprimer ensuite
+    const { data: ancien } = await db.from("reglages").select("*").eq("entreprise_id", ent.id).maybeSingle();
+    const ancienChemin = ancien ? ancien[quoi + "_chemin"] : null;
+
+    const champs = { entreprise_id: ent.id, updated_at: new Date().toISOString() };
+    champs[quoi + "_url"] = pub.publicUrl;
+    champs[quoi + "_chemin"] = chemin;
+
+    const { error } = await db.from("reglages").upsert(champs, { onConflict: "entreprise_id" });
+    if (error) {
+      await db.storage.from(BUCKET).remove([chemin]);
+      status(statusEl, "Erreur : " + error.message, "err");
+      if (btn) btn.disabled = false; return;
+    }
+
+    if (ancienChemin) await db.storage.from(BUCKET).remove([ancienChemin]);
+
+    const NOM = { logo: "Logo", photo: "Photo", couverture: "Image de couverture" };
+    status(statusEl, (NOM[quoi] || "Image") + " mise à jour ✓ Rechargez le site pour voir le résultat.", "ok");
+    if (btn) btn.disabled = false;
+    chargerReglages();
+  }
+
+  const logoForm = $("logoForm");
+  if (logoForm) logoForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    uploaderImage("logo", $("logoFile").files[0], $("logoStatus"), $("logoSubmit"));
+  });
+
+  const photoForm = $("photoForm");
+  if (photoForm) photoForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    uploaderImage("photo", $("photoFile").files[0], $("photoStatus"), $("photoSubmit"));
+  });
+
+  const couvForm = $("couvertureForm");
+  if (couvForm) couvForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    uploaderImage("couverture", $("couvertureFile").files[0], $("couvertureStatus"), $("couvertureSubmit"), 4);
+  });
+
+  async function retirerImage(quoi) {
+    const LBL = { logo: "le logo", photo: "la photo", couverture: "l'image de couverture" };
+    if (!confirm(`Retirer ${LBL[quoi] || "cette image"} ?`)) return;
+    const db = window._db;
+    const ent = await getEnt(db);
+    if (!ent) return;
+    const { data: reg } = await db.from("reglages").select("*").eq("entreprise_id", ent.id).maybeSingle();
+    if (reg && reg[quoi + "_chemin"]) await db.storage.from(BUCKET).remove([reg[quoi + "_chemin"]]);
+
+    const champs = { entreprise_id: ent.id, updated_at: new Date().toISOString() };
+    champs[quoi + "_url"] = null;
+    champs[quoi + "_chemin"] = null;
+    const { error } = await db.from("reglages").upsert(champs, { onConflict: "entreprise_id" });
+    if (error) alert("Erreur : " + error.message); else chargerReglages();
+  }
 })();

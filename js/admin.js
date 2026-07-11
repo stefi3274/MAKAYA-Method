@@ -24,6 +24,8 @@
       charger();
       if (window.chargerGalerie) window.chargerGalerie();
       if (window.chargerAbonnes) window.chargerAbonnes();
+      if (window.chargerReglages) window.chargerReglages();
+      if (window.chargerArticles) window.chargerArticles();
     }
   }
 

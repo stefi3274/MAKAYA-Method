@@ -54,6 +54,8 @@
       <div class="admin-tabs">
         <button class="tab on" data-tab="bord">📊 Tableau de bord</button>
         <button class="tab" data-tab="demandes">📋 Demandes</button>
+        <button class="tab" data-tab="image">🪪 Mon image</button>
+        <button class="tab" data-tab="blog">✍️ Blog</button>
         <button class="tab" data-tab="galerie">🖼️ Images &amp; flyers</button>
         <button class="tab" data-tab="abonnes">✉️ Abonnés</button>
       </div>
@@ -86,6 +88,77 @@
         <div id="liste"></div>
       </div>
 
+      <div id="tab-image" style="display:none">
+        <p style="font-size:.92rem;color:var(--muted-d);margin-bottom:24px">Votre logo et votre photo apparaîtront automatiquement sur le site, à la place des visuels par défaut.</p>
+
+        <div class="brand-grid">
+          <!-- LOGO -->
+          <form id="logoForm" class="brand-card">
+            <h3>Votre logo</h3>
+            <p class="bc-note">Format carré de préférence. PNG avec fond transparent idéalement. Max 3 Mo.</p>
+            <div class="apercu" id="apercuLogo"><div class="img-vide">Aucun logo</div></div>
+            <div class="status-msg" id="logoStatus"></div>
+            <div class="field"><input type="file" id="logoFile" accept="image/*" required></div>
+            <button type="submit" class="btn btn-primary" id="logoSubmit" style="width:100%;justify-content:center">Mettre à jour le logo</button>
+          </form>
+
+          <!-- PHOTO -->
+          <form id="photoForm" class="brand-card">
+            <h3>Votre photo</h3>
+            <p class="bc-note">Un portrait professionnel, de préférence en portrait (vertical). Max 3 Mo.</p>
+            <div class="apercu" id="apercuPhoto"><div class="img-vide">Aucune photo</div></div>
+            <div class="status-msg" id="photoStatus"></div>
+            <div class="field"><input type="file" id="photoFile" accept="image/*" required></div>
+            <button type="submit" class="btn btn-primary" id="photoSubmit" style="width:100%;justify-content:center">Mettre à jour la photo</button>
+          </form>
+
+          <!-- COUVERTURE -->
+          <form id="couvertureForm" class="brand-card brand-wide">
+            <h3>Image de couverture</h3>
+            <p class="bc-note">La grande image de fond sur la page d'accueil. Choisissez une photo en <b>paysage</b> (horizontale), lumineuse et pas trop chargée — le texte s'affiche par-dessus. Max 4 Mo.</p>
+            <div class="apercu apercu-large" id="apercuCouverture"><div class="img-vide">Aucune image de couverture</div></div>
+            <div class="status-msg" id="couvertureStatus"></div>
+            <div class="field"><input type="file" id="couvertureFile" accept="image/*" required></div>
+            <button type="submit" class="btn btn-primary" id="couvertureSubmit" style="width:100%;justify-content:center">Mettre à jour la couverture</button>
+          </form>
+        </div>
+      </div>
+
+      <div id="tab-blog" style="display:none">
+        <form id="artForm" class="gal-upload">
+          <h3 id="artFormTitre" style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--nuit);margin-bottom:16px">Nouvel article</h3>
+          <div class="status-msg" id="artStatus"></div>
+
+          <div class="row" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <div class="field"><label>Titre *</label><input type="text" id="artTitre" required placeholder="Ex. Pourquoi les petits pas changent tout"></div>
+            <div class="field"><label>Catégorie</label><input type="text" id="artCategorie" placeholder="Ex. Habitudes"></div>
+          </div>
+
+          <div class="field"><label>Extrait <span style="color:var(--muted);font-weight:400">(le petit texte visible sur la carte)</span></label><textarea id="artExtrait" style="min-height:70px" placeholder="Une ou deux phrases pour donner envie de lire…"></textarea></div>
+
+          <div class="field"><label>Contenu de l'article</label><textarea id="artContenu" style="min-height:180px" placeholder="Écrivez votre article ici. Laissez une ligne vide entre chaque paragraphe."></textarea></div>
+
+          <div class="field">
+            <label>Image d'illustration <span style="color:var(--muted);font-weight:400">(optionnelle, max 4 Mo)</span></label>
+            <div class="apercu apercu-art" id="artApercuImg"><div class="img-vide">Aucune image</div></div>
+            <input type="file" id="artImage" accept="image/*">
+          </div>
+
+          <label style="display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--nuit);margin-bottom:18px;cursor:pointer">
+            <input type="checkbox" id="artPublie" checked style="width:auto;margin:0">
+            Publier sur le site <span style="color:var(--muted);font-weight:400">(sinon, gardé en brouillon)</span>
+          </label>
+
+          <div style="display:flex;gap:10px">
+            <button type="submit" class="btn btn-primary" id="artSubmit" style="flex:1;justify-content:center">Publier l'article</button>
+            <button type="button" class="btn btn-ghost" id="artAnnuler" style="display:none">Annuler</button>
+          </div>
+        </form>
+
+        <div class="compteur" id="artCompteur">—</div>
+        <div id="artListe"></div>
+      </div>
+
       <div id="tab-galerie" style="display:none">
         <form id="galForm" class="gal-upload">
           <div class="status-msg" id="galStatus"></div>
@@ -115,5 +188,6 @@
 <script src="js/supabase-config.js"></script>
 <script src="js/admin.js"></script>
 <script src="js/admin-extras.js"></script>
+<script src="js/admin-blog.js"></script>
 </body>
 </html>

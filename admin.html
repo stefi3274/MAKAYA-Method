@@ -56,6 +56,7 @@
         <button class="tab" data-tab="demandes">📋 Demandes</button>
         <button class="tab" data-tab="image">🪪 Mon image</button>
         <button class="tab" data-tab="blog">✍️ Blog</button>
+        <button class="tab" data-tab="temoignages">💬 Témoignages</button>
         <button class="tab" data-tab="galerie">🖼️ Images &amp; flyers</button>
         <button class="tab" data-tab="abonnes">✉️ Abonnés</button>
       </div>
@@ -159,6 +160,43 @@
         <div id="artListe"></div>
       </div>
 
+      <div id="tab-temoignages" style="display:none">
+        <form id="temForm" class="gal-upload">
+          <h3 id="temFormTitre" style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--nuit);margin-bottom:6px">Nouveau témoignage</h3>
+          <p style="font-size:.86rem;color:var(--muted);margin-bottom:18px">⚠️ Ne publiez un témoignage qu'avec l'accord de la personne concernée.</p>
+          <div class="status-msg" id="temStatus"></div>
+
+          <div class="row" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <div class="field"><label>Nom de la personne *</label><input type="text" id="temAuteur" required placeholder="Ex. Nadège, ou N."></div>
+            <div class="field"><label>Contexte</label><input type="text" id="temContexte" placeholder="Ex. Coaching individuel"></div>
+          </div>
+
+          <div class="field"><label>Son témoignage *</label><textarea id="temTexte" required style="min-height:110px" placeholder="Ce qu'elle ou il a écrit…"></textarea></div>
+
+          <div class="field" style="max-width:200px">
+            <label>Note</label>
+            <select id="temNote">
+              <option value="5" selected>★★★★★</option>
+              <option value="4">★★★★</option>
+              <option value="3">★★★</option>
+            </select>
+          </div>
+
+          <label style="display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--nuit);margin-bottom:18px;cursor:pointer">
+            <input type="checkbox" id="temPublie" checked style="width:auto;margin:0">
+            Publier sur le site
+          </label>
+
+          <div style="display:flex;gap:10px">
+            <button type="submit" class="btn btn-primary" id="temSubmit" style="flex:1;justify-content:center">Publier le témoignage</button>
+            <button type="button" class="btn btn-ghost" id="temAnnuler" style="display:none">Annuler</button>
+          </div>
+        </form>
+
+        <div class="compteur" id="temCompteur">—</div>
+        <div id="temListe"></div>
+      </div>
+
       <div id="tab-galerie" style="display:none">
         <form id="galForm" class="gal-upload">
           <div class="status-msg" id="galStatus"></div>
@@ -189,5 +227,6 @@
 <script src="js/admin.js"></script>
 <script src="js/admin-extras.js"></script>
 <script src="js/admin-blog.js"></script>
+<script src="js/admin-temoignages.js"></script>
 </body>
 </html>

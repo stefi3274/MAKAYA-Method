@@ -26,6 +26,7 @@
       if (window.chargerAbonnes) window.chargerAbonnes();
       if (window.chargerReglages) window.chargerReglages();
       if (window.chargerArticles) window.chargerArticles();
+      if (window.chargerTemoignages) window.chargerTemoignages();
     }
   }
 

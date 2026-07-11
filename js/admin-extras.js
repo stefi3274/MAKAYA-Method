@@ -9,7 +9,7 @@
     tab.addEventListener("click", () => {
       const t = tab.getAttribute("data-tab");
       document.querySelectorAll(".admin-tabs .tab").forEach(x => x.classList.toggle("on", x === tab));
-      ["bord", "demandes", "blog", "galerie", "abonnes", "image"].forEach(k => {
+      ["bord", "demandes", "blog", "temoignages", "galerie", "abonnes", "image"].forEach(k => {
         const el = document.getElementById("tab-" + k);
         if (el) el.style.display = (t === k) ? "block" : "none";
       });

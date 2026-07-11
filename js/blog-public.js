@@ -20,11 +20,11 @@
         .select("*").eq("entreprise_id", ent.id).eq("publie", true)
         .order("created_at", { ascending: false });
 
-      if (error || !data || data.length === 0) return; // garder les exemples
+      if (error || !data || data.length === 0) return; // garder l'état vide
 
-      // Retirer la note "articles bientôt"
-      const note = grid.parentElement.querySelector("p[style*='text-align:center']");
-      if (note) note.remove();
+      // Masquer le message "articles bientôt"
+      const vide = document.getElementById("blogVide");
+      if (vide) vide.style.display = "none";
 
       grid.innerHTML = data.map((a, i) => {
         const visuel = a.image_url

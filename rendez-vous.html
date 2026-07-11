@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prendre rendez-vous & s'inscrire — Makaya Method</title>
+<meta name="description" content="Demandez une première séance de coaching ou inscrivez-vous à un séminaire Makaya Method avec Mélissa Paultre.">
+<meta property="og:title" content="Prendre rendez-vous & s'inscrire — Makaya Method">
+<meta property="og:description" content="Demandez une première séance de coaching ou inscrivez-vous à un séminaire Makaya Method avec Mélissa Paultre.">
+<meta name="theme-color" content="#1e2d43">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Karla:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="brand">
+      <span class="mk">M</span>
+      <span class="bn">Makaya Method<small>Coaching &amp; comportement</small></span>
+    </a>
+    <nav class="menu" id="menu">
+        <a href="index.html">Accueil</a>
+        <a href="a-propos.html">À propos</a>
+        <a href="services.html">Services</a>
+        <a href="temoignages.html">Témoignages</a>
+        <a href="blog.html">Blog</a>
+        <a href="rendez-vous.html" class="active">Rendez-vous</a>
+        <a href="contact.html">Contact</a>
+        <a href="rendez-vous.html" class="cta">Prendre rendez-vous</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap reveal">
+    <span class="eyebrow on-dark center">Faisons le premier pas</span>
+    <h1>Prendre <em>rendez-vous</em></h1>
+    <p>Choisissez ce qui vous correspond : une première séance de coaching, ou une inscription à un séminaire.</p>
+    <div class="crumbs"><a href="index.html">Accueil</a> › Rendez-vous</div>
+  </div>
+</section>
+
+<section style="padding-top:54px">
+  <div class="wrap form-wrap">
+    <div class="form-tabs reveal">
+      <button class="on" data-form="questionnaire">Première séance</button>
+      <button data-form="seminaire">Séminaire / atelier</button>
+    </div>
+
+    <!-- Questionnaire avant 1re séance -->
+    <div id="zone-questionnaire" class="reveal">
+      <div class="form-intro">
+        <b>Avant notre première rencontre.</b> Ces quelques questions m'aident à comprendre votre situation et à préparer au mieux notre échange. Prenez le temps : il n'y a pas de mauvaise réponse.
+      </div>
+      <form class="form" id="questionnaireForm">
+        <div class="status-msg" id="questionnaireStatus"></div>
+        <div class="row">
+          <div class="field"><label>Votre nom *</label><input type="text" name="nom" required placeholder="Prénom et nom"></div>
+          <div class="field"><label>Téléphone *</label><input type="tel" name="telephone" required placeholder="+509 …"></div>
+        </div>
+        <div class="field"><label>Email</label><input type="email" name="email" placeholder="votre@email.com"></div>
+        <div class="field"><label>Où en êtes-vous aujourd'hui ?</label>
+          <select name="situation">
+            <option value="">— Choisir —</option>
+            <option>Je traverse une transition de vie</option>
+            <option>Je manque de confiance en moi</option>
+            <option>Je peine à atteindre mes objectifs</option>
+            <option>Je gère mal mes émotions ou mon stress</option>
+            <option>Je veux progresser professionnellement</option>
+            <option>Autre / je préfère en parler</option>
+          </select>
+        </div>
+        <div class="field"><label>Qu'aimeriez-vous voir changer ?</label><textarea name="objectif" placeholder="Votre objectif, en vos mots…"></textarea></div>
+        <div class="field"><label>Qu'est-ce qui vous freine le plus aujourd'hui ?</label><textarea name="obstacle" placeholder="Ce qui vous bloque, selon vous…"></textarea></div>
+        <div class="row">
+          <div class="field"><label>Avez-vous déjà fait du coaching ?</label>
+            <select name="deja_coach">
+              <option value="">— Choisir —</option>
+              <option>Non, c'est une première</option>
+              <option>Oui, par le passé</option>
+              <option>Oui, actuellement</option>
+            </select>
+          </div>
+          <div class="field"><label>Vos disponibilités</label><input type="text" name="disponibilite" placeholder="Ex. en soirée, le week-end…"></div>
+        </div>
+        <div class="field">
+          <label>Comment préférez-vous être recontacté(e) ?</label>
+          <select name="communication">
+            <option value="">— Choisir —</option>
+            <option>WhatsApp (message)</option>
+            <option>WhatsApp (appel)</option>
+            <option>Appel téléphonique</option>
+            <option>SMS</option>
+            <option>Email</option>
+            <option>Visioconférence (Zoom, Meet…)</option>
+            <option>Peu importe</option>
+          </select>
+        </div>
+        <div class="field"><label>Autre chose à me dire ?</label><textarea name="message" placeholder="Facultatif"></textarea></div>
+        <button type="submit" class="btn btn-primary">Envoyer et demander un rendez-vous <span class="arr">→</span></button>
+        <p class="form-note">Vos réponses sont enregistrées et s'ouvrent aussi dans WhatsApp, prêtes à envoyer. Elles restent strictement confidentielles.</p>
+      </form>
+    </div>
+
+    <!-- Inscription séminaire -->
+    <div id="zone-seminaire" style="display:none" class="reveal">
+      <div class="form-intro">
+        <b>Inscription à un séminaire ou un atelier.</b> Indiquez-moi ce qui vous intéresse : je vous recontacte avec les dates, le lieu et les modalités.
+      </div>
+      <form class="form" id="seminaireForm">
+        <div class="status-msg" id="seminaireStatus"></div>
+        <div class="row">
+          <div class="field"><label>Votre nom *</label><input type="text" name="nom" required placeholder="Prénom et nom"></div>
+          <div class="field"><label>Téléphone *</label><input type="tel" name="telephone" required placeholder="+509 …"></div>
+        </div>
+        <div class="field"><label>Email</label><input type="email" name="email" placeholder="votre@email.com"></div>
+        <div class="row">
+          <div class="field"><label>Programme qui vous intéresse</label>
+            <select name="programme">
+              <option value="">— Choisir —</option>
+              <option>Confiance en soi</option>
+              <option>Gestion des émotions</option>
+              <option>Motivation &amp; objectifs</option>
+              <option>Habitudes durables</option>
+              <option>Leadership &amp; communication</option>
+              <option>Séminaire en entreprise</option>
+              <option>À conseiller</option>
+            </select>
+          </div>
+          <div class="field"><label>Format souhaité</label>
+            <select name="format">
+              <option value="">— Choisir —</option>
+              <option>Atelier d'une journée</option>
+              <option>Séminaire sur plusieurs jours</option>
+              <option>Session en entreprise</option>
+              <option>Je ne sais pas encore</option>
+            </select>
+          </div>
+        </div>
+        <div class="field"><label>Nombre de participants</label><input type="text" name="participants" placeholder="Ex. moi seul(e), ou une équipe de 12"></div>
+        <div class="field">
+          <label>Comment préférez-vous être recontacté(e) ?</label>
+          <select name="communication">
+            <option value="">— Choisir —</option>
+            <option>WhatsApp (message)</option>
+            <option>WhatsApp (appel)</option>
+            <option>Appel téléphonique</option>
+            <option>SMS</option>
+            <option>Email</option>
+            <option>Visioconférence (Zoom, Meet…)</option>
+            <option>Peu importe</option>
+          </select>
+        </div>
+        <div class="field"><label>Votre message</label><textarea name="message" placeholder="Vos attentes, vos questions…"></textarea></div>
+        <button type="submit" class="btn btn-primary">Envoyer ma demande d'inscription <span class="arr">→</span></button>
+        <p class="form-note">Votre demande est enregistrée et s'ouvre aussi dans WhatsApp, prête à envoyer.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+document.querySelectorAll(".form-tabs button").forEach(b => {
+  b.addEventListener("click", () => {
+    const f = b.getAttribute("data-form");
+    document.querySelectorAll(".form-tabs button").forEach(x => x.classList.toggle("on", x === b));
+    document.getElementById("zone-questionnaire").style.display = (f === "questionnaire") ? "block" : "none";
+    document.getElementById("zone-seminaire").style.display = (f === "seminaire") ? "block" : "none";
+  });
+});
+</script>
+
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div class="f-brand">
+        <a href="index.html" class="brand">
+          <span class="mk">M</span>
+          <span class="bn">Makaya Method<small>Coaching &amp; comportement</small></span>
+        </a>
+        <p>Accompagner chaque personne vers ses objectifs, grâce aux outils de la science du comportement. Avec douceur, avec méthode.</p>
+      </div>
+      <div>
+        <h4>Naviguer</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="a-propos.html">À propos</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="temoignages.html">Témoignages</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="rendez-vous.html">Rendez-vous</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="mentions-legales.html">Mentions légales</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Rester en lien</h4>
+        <ul>
+          <li><a href="mailto:lissa_paultre@yahoo.com">lissa_paultre@yahoo.com</a></li>
+          <li><a href="https://wa.me/50948956823" target="_blank" rel="noopener">+509 48 95 6823</a></li>
+          <li><a href="rendez-vous.html">Prendre rendez-vous</a></li>
+          <li><span>Sur rendez-vous</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <span>© <span class="year"></span> Makaya Method — Tous droits réservés.</span>
+      <span>Créé par SteFi Services</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" href="#" id="waFloat" aria-label="WhatsApp"><svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 .4C7.4.4.4 7.4.4 16c0 2.8.7 5.4 2 7.8L.3 31.6l8-2.1c2.3 1.2 4.9 1.9 7.7 1.9 8.6 0 15.6-7 15.6-15.6S24.6.4 16 .4zm0 28.2c-2.5 0-4.8-.7-6.8-1.8l-.5-.3-4.7 1.2 1.3-4.6-.3-.5c-1.3-2-2-4.4-2-6.8C3.2 9 9 3.2 16 3.2S28.8 9 28.8 16 23 28.6 16 28.6zm7.1-9.6c-.4-.2-2.3-1.1-2.6-1.3-.4-.1-.6-.2-.9.2s-1 1.3-1.2 1.5c-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3.1-1.9-1.1-1-1.9-2.3-2.2-2.7-.2-.4 0-.6.2-.8.2-.2.4-.4.5-.7.2-.2.2-.4.4-.6.1-.3 0-.5 0-.7-.1-.2-.9-2.1-1.2-2.9-.3-.8-.6-.7-.9-.7h-.7c-.2 0-.6.1-1 .5-.3.4-1.3 1.3-1.3 3.1s1.3 3.6 1.5 3.9c.2.2 2.6 4 6.4 5.6.9.4 1.6.6 2.1.8.9.3 1.7.2 2.3.1.7-.1 2.3-.9 2.6-1.8.3-.9.3-1.6.2-1.8-.1-.1-.3-.2-.7-.4z"/></svg><span class="t">Écrivez-moi</span></a>
+<script src="js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/formulaires.js"></script>
+</body>
+</html>

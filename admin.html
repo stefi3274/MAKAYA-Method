@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Espace privé — Makaya Method</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Karla:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="brand">
+      <span class="mk">M</span>
+      <span class="bn">Makaya Method<small>Espace privé</small></span>
+    </a>
+    <nav class="menu"><a href="index.html">← Retour au site</a></nav>
+  </div>
+</header>
+
+<section style="padding-top:56px">
+  <div class="wrap admin-shell">
+
+    <div id="setupNote" style="display:none" class="login-card">
+      <h2 style="font-size:1.4rem;margin-bottom:10px;color:var(--nuit)">Configuration requise</h2>
+      <p style="color:var(--muted-d);font-size:.92rem">La connexion à la base n'est pas encore configurée.</p>
+    </div>
+
+    <div id="loginView" style="display:none">
+      <div class="login-card">
+        <div class="head" style="margin-bottom:26px">
+          <span class="eyebrow center">Accès réservé</span>
+          <h2 style="font-size:1.8rem;margin-top:10px">Connexion</h2>
+        </div>
+        <form id="loginForm">
+          <div class="status-msg" id="loginStatus"></div>
+          <div class="field"><label>Email</label><input type="email" id="admEmail" required placeholder="lissa_paultre@yahoo.com"></div>
+          <div class="field"><label>Mot de passe</label><input type="password" id="admPass" required placeholder="••••••••"></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Se connecter</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="panel" style="display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;flex-wrap:wrap;gap:14px">
+        <h1 style="font-size:2rem;color:var(--nuit)">Votre espace</h1>
+        <button class="btn btn-ghost" id="logoutBtn">Se déconnecter</button>
+      </div>
+
+      <div class="admin-tabs">
+        <button class="tab on" data-tab="bord">📊 Tableau de bord</button>
+        <button class="tab" data-tab="demandes">📋 Demandes</button>
+        <button class="tab" data-tab="galerie">🖼️ Images &amp; flyers</button>
+        <button class="tab" data-tab="abonnes">✉️ Abonnés</button>
+      </div>
+
+      <div id="tab-bord">
+        <div class="stats-grid">
+          <div class="stat stat-main"><span class="s-num" id="statTotal">—</span><span class="s-lbl">Demandes au total</span></div>
+          <div class="stat stat-alert"><span class="s-num" id="statNouvelles">—</span><span class="s-lbl">Nouvelles à traiter</span></div>
+          <div class="stat"><span class="s-num" id="statMois">—</span><span class="s-lbl">Ce mois-ci</span></div>
+        </div>
+        <div class="stats-grid" style="margin-top:16px">
+          <div class="stat stat-sm"><span class="s-num" id="statQuestionnaire">—</span><span class="s-lbl">Questionnaires</span></div>
+          <div class="stat stat-sm"><span class="s-num" id="statSeminaire">—</span><span class="s-lbl">Séminaires</span></div>
+          <div class="stat stat-sm"><span class="s-num" id="statContact">—</span><span class="s-lbl">Contacts</span></div>
+        </div>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--nuit);margin:34px 0 14px">Dernières demandes</h3>
+        <div id="statRecent"></div>
+      </div>
+
+      <div id="tab-demandes" style="display:none">
+        <div class="admin-filter">
+          <button class="on" data-f="tous">Toutes</button>
+          <button data-f="questionnaire">Questionnaires</button>
+          <button data-f="seminaire">Séminaires</button>
+          <button data-f="contact">Contacts</button>
+          <button data-f="nouveau">Nouvelles</button>
+          <button data-f="traite">Traitées</button>
+        </div>
+        <div class="compteur" id="compteur">—</div>
+        <div id="liste"></div>
+      </div>
+
+      <div id="tab-galerie" style="display:none">
+        <form id="galForm" class="gal-upload">
+          <div class="status-msg" id="galStatus"></div>
+          <p style="font-size:.9rem;color:var(--muted-d);margin-bottom:18px">Publiez vos flyers de séminaires, affiches d'ateliers ou photos d'événements.</p>
+          <div class="field"><label>Image ou flyer (max 5 Mo)</label><input type="file" id="galFile" accept="image/*" required></div>
+          <div class="field"><label>Titre <span style="color:var(--muted);font-weight:400">(optionnel)</span></label><input type="text" id="galTitre" placeholder="Ex. Atelier confiance en soi — 12 mars"></div>
+          <button type="submit" class="btn btn-primary" id="galSubmit" style="width:100%;justify-content:center">Publier</button>
+        </form>
+        <div class="compteur" id="galCompteur">—</div>
+        <div class="gal-grid" id="galListe"></div>
+      </div>
+
+      <div id="tab-abonnes" style="display:none">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px">
+          <div class="compteur" id="abCompteur" style="margin:0">—</div>
+          <button class="btn btn-ghost" id="abExport" style="padding:10px 20px;font-size:.88rem">Copier tous les emails</button>
+        </div>
+        <p style="font-size:.88rem;color:var(--muted);margin-bottom:20px">Les personnes inscrites à votre newsletter depuis le site. Vous pouvez copier leurs emails pour les importer dans votre outil d'envoi.</p>
+        <div id="abListe"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/admin.js"></script>
+<script src="js/admin-extras.js"></script>
+</body>
+</html>

@@ -9,7 +9,8 @@
   --nuit:#1e2d43;         /* bleu nuit - profondeur, science */
   --nuit-d:#16222f;
   --nuit-l:#2c4159;
-  --terra:#c06549;        /* terracotta - chaleur humaine */
+  --terra:#c06549;        /* terracotta - accent (textes, bordures) */
+  --terra-btn:#b35a40;    /* terracotta boutons - contraste AA avec texte blanc */
   --terra-d:#a5523a;
   --terra-l:#d98d72;
   --beige:#e8dccb;        /* beige - calme */
@@ -47,7 +48,8 @@ em.soft{font-style:italic;color:var(--terra)}
 header{position:sticky;top:0;z-index:60;background:rgba(247,242,233,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:80px}
 .brand{display:flex;align-items:center;gap:12px}
-.brand .mk{width:46px;height:46px;border-radius:50%;background:linear-gradient(140deg,var(--nuit),var(--nuit-l));display:flex;align-items:center;justify-content:center;color:var(--creme);font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-style:italic;flex:0 0 auto;box-shadow:var(--shadow-sm)}
+.brand .mk{width:48px;height:48px;border-radius:50%;background:var(--creme-2);display:flex;align-items:center;justify-content:center;color:var(--nuit);font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-style:italic;flex:0 0 auto;overflow:hidden;padding:3px}
+.brand .mk img{width:100%;height:100%;object-fit:contain;display:block}
 .brand .bn{font-family:'Cormorant Garamond',serif;font-size:1.32rem;font-weight:600;line-height:1;color:var(--nuit)}
 .brand .bn small{display:block;font-family:'Karla',sans-serif;font-size:.57rem;letter-spacing:.24em;text-transform:uppercase;color:var(--terra);font-weight:600;margin-top:4px}
 .menu{display:flex;gap:26px;align-items:center;font-size:.93rem;font-weight:500}
@@ -67,8 +69,8 @@ header{position:sticky;top:0;z-index:60;background:rgba(247,242,233,.9);backdrop
 /* ---------- Buttons ---------- */
 .btns{display:flex;gap:14px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:32px;font-weight:600;font-size:.96rem;cursor:pointer;border:0;font-family:inherit;transition:transform .2s,box-shadow .2s,background .2s,color .2s}
-.btn-primary{background:var(--terra);color:#fff;box-shadow:0 14px 30px -12px rgba(192,101,73,.55)}
-.btn-primary:hover{background:var(--terra-d);transform:translateY(-2px)}
+.btn-primary{background:var(--terra-btn);color:#fff;box-shadow:0 12px 28px -12px rgba(165,82,58,.5)}
+.btn-primary:hover{background:var(--terra-d);transform:translateY(-2px);box-shadow:0 16px 32px -12px rgba(165,82,58,.6)}
 .btn-dark{background:var(--nuit);color:var(--creme)}
 .btn-dark:hover{background:var(--nuit-d);transform:translateY(-2px)}
 .btn-ghost{background:transparent;color:var(--nuit);border:1.5px solid var(--border)}
@@ -373,8 +375,8 @@ header{position:sticky;top:0;z-index:60;background:rgba(247,242,233,.9);backdrop
 .prose ul{margin:0 0 18px 4px;list-style:none;display:flex;flex-direction:column;gap:10px}
 .prose ul li{padding-left:24px;position:relative;color:var(--muted-d)}
 .prose ul li::before{content:"✦";position:absolute;left:0;color:var(--terra)}
-.prose a{color:var(--terra);font-weight:500}
-.prose a:hover{text-decoration:underline}
+.prose a:not(.btn){color:var(--terra);font-weight:500}
+.prose a:not(.btn):hover{text-decoration:underline}
 
 /* ---------- Admin ---------- */
 .admin-shell{max-width:920px;margin:0 auto}
@@ -403,7 +405,7 @@ header{position:sticky;top:0;z-index:60;background:rgba(247,242,233,.9);backdrop
 footer{background:var(--nuit);color:#b8c3d1;padding:66px 0 26px;border-top:3px solid var(--terra)}
 .f-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:42px;margin-bottom:44px}
 .f-brand .brand{margin-bottom:16px}
-.f-brand .brand .mk{background:linear-gradient(140deg,var(--terra),var(--terra-l))}
+.f-brand .brand .mk{background:var(--creme)}
 .f-brand .brand .bn{color:var(--creme)}
 .f-brand p{font-size:.92rem;color:#93a1b2;max-width:310px}
 footer h4{font-family:'Cormorant Garamond',serif;color:var(--creme);font-size:1.15rem;margin-bottom:15px;font-weight:600}

@@ -24,16 +24,14 @@
         }
       }
 
-      // --- LOGO : remplace le "M" dans tous les .brand .mk ---
+      // --- LOGO : remplace le logo par défaut si Mélissa en uploade un ---
       if (reg.logo_url) {
         document.querySelectorAll(".brand .mk").forEach(el => {
-          el.textContent = "";
-          el.style.background = "transparent";
-          el.style.boxShadow = "none";
+          el.innerHTML = "";
           const img = document.createElement("img");
           img.src = reg.logo_url;
           img.alt = "Makaya Method";
-          img.style.cssText = "width:100%;height:100%;object-fit:contain;border-radius:50%";
+          img.style.cssText = "width:100%;height:100%;object-fit:contain;display:block";
           el.appendChild(img);
         });
       }
